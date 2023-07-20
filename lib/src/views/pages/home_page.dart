@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
     final ttsProvider = Provider.of<TTSProvider>(context, listen: false);
     ttsProvider.initLanguages();
     final configProvider = Provider.of<ConfigProvider>(context, listen: false);
@@ -76,9 +75,13 @@ class _HomePageState extends State<HomePage> {
                               configProvider.cardStyle != 'Solo texto'
                                   ? Image.asset(
                                       'assets/images/afirmar_m.png',
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              8 *
+                                      height: configProvider.cardStyle ==
+                                              "Solo imagen"
+                                          ? MediaQuery.of(context).size.height *
+                                              4 *
+                                              configProvider.factorSize!
+                                          : MediaQuery.of(context).size.height *
+                                              3 *
                                               configProvider.factorSize!,
                                     )
                                   : const SizedBox.shrink(),
@@ -126,9 +129,13 @@ class _HomePageState extends State<HomePage> {
                               configProvider.cardStyle != 'Solo texto'
                                   ? Image.asset(
                                       'assets/images/negar_m.png',
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              8 *
+                                      height: configProvider.cardStyle ==
+                                              "Solo imagen"
+                                          ? MediaQuery.of(context).size.height *
+                                              4 *
+                                              configProvider.factorSize!
+                                          : MediaQuery.of(context).size.height *
+                                              3 *
                                               configProvider.factorSize!,
                                     )
                                   : const SizedBox.shrink(),
@@ -183,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                       'assets/images/afirmar_m.png',
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              14 *
+                                              10 *
                                               configProvider.factorSize!,
                                     )
                                   : const SizedBox.shrink(),
@@ -233,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                                       'assets/images/negar_m.png',
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              14 *
+                                              10 *
                                               configProvider.factorSize!,
                                     )
                                   : const SizedBox.shrink(),

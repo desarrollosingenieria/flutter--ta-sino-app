@@ -376,7 +376,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             ? mq.width * 0.04
                             : mq.height * 0.04,
                       ),
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Material(
@@ -407,7 +407,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             ),
                           ),
                           SizedBox(
-                            width: orientation == Orientation.portrait
+                            height: orientation == Orientation.portrait
                                 ? mq.width * 0.02
                                 : mq.height * 0.02,
                           ),
@@ -439,7 +439,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             ),
                           ),
                           SizedBox(
-                            width: orientation == Orientation.portrait
+                            height: orientation == Orientation.portrait
                                 ? mq.width * 0.02
                                 : mq.height * 0.02,
                           ),
@@ -476,7 +476,7 @@ class _ConfigPageState extends State<ConfigPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40.0),
+                  padding: const EdgeInsets.only(bottom: 20.0),
                   child: Column(
                     children: [
                       Text(
@@ -494,7 +494,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             ? mq.width * 0.04
                             : mq.height * 0.04,
                       ),
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Material(
@@ -526,7 +526,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             ),
                           ),
                           SizedBox(
-                            width: orientation == Orientation.portrait
+                            height: orientation == Orientation.portrait
                                 ? mq.width * 0.02
                                 : mq.height * 0.02,
                           ),
@@ -560,7 +560,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             ),
                           ),
                           SizedBox(
-                            width: orientation == Orientation.portrait
+                            height: orientation == Orientation.portrait
                                 ? mq.width * 0.02
                                 : mq.height * 0.02,
                           ),

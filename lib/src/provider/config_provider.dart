@@ -19,7 +19,7 @@ class ConfigProvider with ChangeNotifier {
   }
 
   void setFactorSize(double size, String factorText) {
-    print(size);
+    
     if (factorText == 'grande') {
       prefs.factorText = 'grande';
       _factorText = 'grande';

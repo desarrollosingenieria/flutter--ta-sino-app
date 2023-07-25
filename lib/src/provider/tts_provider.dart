@@ -17,7 +17,7 @@ class TTSProvider with ChangeNotifier {
   String? voice;
 
   Future<void> initLanguages() async {
-    List<Object?> _languages = await _tts.getLanguages;
+    //List<Object?> _languages = await _tts.getLanguages;
     _tts.setLanguage("es-US");
     _pitch = prefs.pitch;
     _rate = prefs.rate;

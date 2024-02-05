@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fleni.tecresponde.tecresponde">
+    package="com.fleni.tasino">
    <application
-        android:label="tecresponde"
+        android:label="tasino"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

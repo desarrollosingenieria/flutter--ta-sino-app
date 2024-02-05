@@ -26,7 +26,7 @@ class UserPreferences {
 
   // GET y SET de rate
   double get rate {
-    return _prefs.getDouble('rate') ?? 1.0;
+    return _prefs.getDouble('rate') ?? 0.5;
   }
 
   set rate(double value) {
@@ -76,6 +76,15 @@ class UserPreferences {
 
   set themeMode(String mode) {
     _prefs.setString('themeMode', mode);
+  }
+
+    // GET y SET del modo de tema
+  bool get highContrast {
+    return _prefs.getBool('highContrast') ?? false;
+  }
+
+  set highContrast(bool mode) {
+    _prefs.setBool('highContrast', mode);
   }
 
   Future<bool> cleanPrefs() async {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tecresponde/src/views/pages/home_page.dart';
+import 'package:tasino/src/views/pages/home_page.dart';
 
-class TecResponde extends StatelessWidget {
-  const TecResponde({super.key});
+class TASino extends StatelessWidget {
+  const TASino({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TecResponde',
+      title: 'TA Si/No',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,

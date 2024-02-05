@@ -1,4 +1,4 @@
-package com.fleni.tecresponde.tecresponde
+package com.fleni.tasino
 
 import io.flutter.embedding.android.FlutterActivity
 

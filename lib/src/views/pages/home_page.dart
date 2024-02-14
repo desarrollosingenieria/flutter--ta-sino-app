@@ -30,9 +30,10 @@ class _HomePageState extends State<HomePage> {
     final configProvider = Provider.of<ConfigProvider>(context);
     return Scaffold(
       backgroundColor: configProvider.highContrast! ? Colors.black : Colors.white,
-      appBar: AppBar(
+      appBar: MediaQuery.of(context).orientation == Orientation.portrait 
+      ? AppBar(
         title: const Text(
-          'TA Si/No',
+          'TA SiNo',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: const Color(0xFF003A70),
@@ -54,7 +55,8 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
-      ),
+      )
+      : const PreferredSize(preferredSize: Size.zero, child: SafeArea(child: SizedBox.shrink(),)),
       body: MediaQuery.of(context).orientation == Orientation.portrait
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,

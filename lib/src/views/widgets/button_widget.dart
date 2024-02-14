@@ -35,10 +35,12 @@ class ButtonWidget extends StatelessWidget {
                                       image,
                                       height: configProvider.cardStyle ==
                                               "Solo imagen"
-                                          ? MediaQuery.of(context).size.width *
-                                              0.5 
-                                          : MediaQuery.of(context).size.width *
-                                              0.4  ,
+                                          ? orientation ==
+                                                  Orientation.portrait
+                                              ? mq.width * 0.6 
+                                              : mq.width * 0.4
+                                          : mq.width *
+                                              0.3  ,
                                     )
                                   : const SizedBox.shrink(),
                               configProvider.cardStyle != 'Solo imagen'
@@ -50,16 +52,12 @@ class ButtonWidget extends StatelessWidget {
                                               "Solo texto"
                                           ? orientation ==
                                                   Orientation.portrait
-                                              ? mq.width *
-                                                  0.3 
-                                              : mq.height *
-                                                  0.3 
+                                              ? mq.width * 0.3 
+                                              : mq.height * 0.3 
                                           : orientation ==
                                                   Orientation.portrait
-                                              ? mq.width *
-                                                  0.14 
-                                              : mq.height *
-                                                  0.1,
+                                              ? mq.width * 0.14 
+                                              : mq.height * 0.1,
                                           fontWeight: FontWeight.bold,
                                           color: prefs.highContrast ? Colors.black : Colors.white),
                                     )

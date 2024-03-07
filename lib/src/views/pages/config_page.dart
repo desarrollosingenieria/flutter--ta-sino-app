@@ -881,6 +881,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               ? Colors.white
                               : const Color(0xFF003A70),
                         ),
+                        textAlign: TextAlign.center,
                       ),
                       SizedBox(
                         height: orientation == Orientation.portrait
@@ -901,7 +902,9 @@ class _ConfigPageState extends State<ConfigPage> {
                           }
                         },
                         child: Image.asset(
-                          'assets/images/fleni-logo.png',
+                          configProvider.highContrast!
+                              ? 'assets/images/fleni-logo-h.png'
+                              : 'assets/images/fleni-logo.png',
                           width: orientation == Orientation.portrait
                               ? mq.width * 0.6
                               : mq.height * 0.6,

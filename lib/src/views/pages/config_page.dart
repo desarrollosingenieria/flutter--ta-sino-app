@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tasino/src/data/local/user_preferences.dart';
 import 'package:tasino/src/provider/config_provider.dart';
 import 'package:tasino/src/provider/tts_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ConfigPage extends StatefulWidget {
+class ConfigPage extends ConsumerWidget {
   const ConfigPage({super.key});
 
   @override
-  State<ConfigPage> createState() => _ConfigPageState();
-}
-
-class _ConfigPageState extends State<ConfigPage> {
-  @override
-  Widget build(BuildContext context) {
-    final ttsProvider = Provider.of<TTSProvider>(context);
-    final configProvider = Provider.of<ConfigProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
     final UserPreferences prefs = UserPreferences();
+    final appConfig = ref.watch(configProvider);
+    //final appTTS = ref.watch(appTTSProvider);
     Size mq = MediaQuery.of(context).size;
     Orientation orientation = MediaQuery.of(context).orientation;
     return Scaffold(
@@ -51,8 +46,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Volumen',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * configProvider.factorSize!
-                              : mq.height * configProvider.factorSize!,
+                              ? mq.width * appConfig.factorSize
+                              : mq.height * appConfig.factorSize,
                           fontWeight: FontWeight.bold,
                           color: prefs.highContrast
                               ? Colors.white
@@ -62,7 +57,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          ttsProvider.setVolume(-0.05);
+                          ref.read(configProvider.notifier).setVolume(-0.05);
                         },
                         borderRadius: BorderRadius.circular(500),
                         child: Container(
@@ -75,7 +70,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               : mq.height * 0.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
-                            color: ttsProvider.volume > 0.05
+                            color: prefs.volume > 0.05
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : const Color(0xFF003A70)
@@ -100,11 +95,11 @@ class _ConfigPageState extends State<ConfigPage> {
                             ? mq.width * 0.3
                             : mq.height * 0.3,
                         child: Text(
-                          '${(ttsProvider.volume * 100).round()}',
+                          '${(appConfig.ttsVolume * 100).round()}',
                           style: TextStyle(
                             fontSize: orientation == Orientation.portrait
-                                ? mq.width * configProvider.factorSize!
-                                : mq.height * configProvider.factorSize!,
+                                ? mq.width * appConfig.factorSize
+                                : mq.height * appConfig.factorSize,
                             fontWeight: FontWeight.normal,
                             color: prefs.highContrast
                                 ? Colors.white
@@ -114,7 +109,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          ttsProvider.setVolume(0.05);
+                          ref.read(configProvider.notifier).setVolume(0.05);
                         },
                         borderRadius: BorderRadius.circular(500),
                         child: Container(
@@ -127,7 +122,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               : mq.height * 0.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
-                            color: ttsProvider.volume < 1
+                            color: appConfig.ttsVolume < 1
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : const Color(0xFF003A70)
@@ -162,8 +157,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Velocidad',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * configProvider.factorSize!
-                              : mq.height * configProvider.factorSize!,
+                              ? mq.width * appConfig.factorSize
+                              : mq.height * appConfig.factorSize,
                           fontWeight: FontWeight.bold,
                           color: prefs.highContrast
                               ? Colors.white
@@ -173,7 +168,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          ttsProvider.setRate(-0.05);
+                          ref.read(configProvider.notifier).setRate(-0.05);
                         },
                         borderRadius: BorderRadius.circular(500),
                         child: Container(
@@ -186,7 +181,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               : mq.height * 0.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
-                            color: ttsProvider.rate > 0.05
+                            color: appConfig.ttsRate > 0.05
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : const Color(0xFF003A70)
@@ -211,11 +206,11 @@ class _ConfigPageState extends State<ConfigPage> {
                             ? mq.width * 0.3
                             : mq.height * 0.3,
                         child: Text(
-                          '${(ttsProvider.rate * 100).round()}',
+                          '${(appConfig.ttsRate * 100).round()}',
                           style: TextStyle(
                             fontSize: orientation == Orientation.portrait
-                                ? mq.width * configProvider.factorSize!
-                                : mq.height * configProvider.factorSize!,
+                                ? mq.width * appConfig.factorSize
+                                : mq.height * appConfig.factorSize,
                             fontWeight: FontWeight.normal,
                             color: prefs.highContrast
                                 ? Colors.white
@@ -225,7 +220,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          ttsProvider.setRate(0.05);
+                          ref.read(configProvider.notifier).setRate(0.05);
                         },
                         borderRadius: BorderRadius.circular(500),
                         child: Container(
@@ -238,7 +233,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               : mq.height * 0.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
-                            color: ttsProvider.rate < 1
+                            color: appConfig.ttsRate < 1
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : const Color(0xFF003A70)
@@ -273,8 +268,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Tono',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * configProvider.factorSize!
-                              : mq.height * configProvider.factorSize!,
+                              ? mq.width * appConfig.factorSize
+                              : mq.height * appConfig.factorSize,
                           fontWeight: FontWeight.bold,
                           color: prefs.highContrast
                               ? Colors.white
@@ -284,7 +279,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          ttsProvider.setPitch(-0.05);
+                          ref.read(configProvider.notifier).setPitch(-0.05);
                         },
                         borderRadius: BorderRadius.circular(500),
                         child: Container(
@@ -297,7 +292,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               : mq.height * 0.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
-                            color: ttsProvider.pitch > 0.05
+                            color: appConfig.ttsPitch > 0.05
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : const Color(0xFF003A70)
@@ -322,11 +317,11 @@ class _ConfigPageState extends State<ConfigPage> {
                             ? mq.width * 0.3
                             : mq.height * 0.3,
                         child: Text(
-                          '${(ttsProvider.pitch * 100).round()}',
+                          '${(appConfig.ttsPitch * 100).round()}',
                           style: TextStyle(
                             fontSize: orientation == Orientation.portrait
-                                ? mq.width * configProvider.factorSize!
-                                : mq.height * configProvider.factorSize!,
+                                ? mq.width * appConfig.factorSize
+                                : mq.height * appConfig.factorSize,
                             fontWeight: FontWeight.normal,
                             color: prefs.highContrast
                                 ? Colors.white
@@ -336,7 +331,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          ttsProvider.setPitch(0.05);
+                          ref.read(configProvider.notifier).setPitch(0.05);
                         },
                         borderRadius: BorderRadius.circular(500),
                         child: Container(
@@ -349,7 +344,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               : mq.height * 0.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
-                            color: ttsProvider.pitch < 1
+                            color: appConfig.ttsPitch < 1
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : const Color(0xFF003A70)
@@ -395,8 +390,8 @@ class _ConfigPageState extends State<ConfigPage> {
                           'Probar voz'.toUpperCase(),
                           style: TextStyle(
                             fontSize: orientation == Orientation.portrait
-                                ? mq.width * 0.68 * configProvider.factorSize!
-                                : mq.height * 0.68 * configProvider.factorSize!,
+                                ? mq.width * 0.68 * appConfig.factorSize
+                                : mq.height * 0.68 * appConfig.factorSize,
                             fontWeight: FontWeight.bold,
                             color: prefs.highContrast
                                 ? Colors.black
@@ -405,7 +400,9 @@ class _ConfigPageState extends State<ConfigPage> {
                         ),
                       ),
                       onTap: () {
-                        ttsProvider.speak(text: 'Esto es una prueba de voz');
+                        ref
+                            .read(appTTSProvider.notifier)
+                            .speak('Esto es una prueba de voz');
                       },
                     ),
                   ),
@@ -418,8 +415,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Estilo de tarjetas',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * configProvider.factorSize!
-                              : mq.height * configProvider.factorSize!,
+                              ? mq.width * appConfig.factorSize
+                              : mq.height * appConfig.factorSize,
                           fontWeight: FontWeight.bold,
                           color: prefs.highContrast
                               ? Colors.white
@@ -436,7 +433,7 @@ class _ConfigPageState extends State<ConfigPage> {
                         children: <Widget>[
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.cardStyle! == 'Solo texto'
+                            color: appConfig.cardStyle == 'Solo texto'
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : Colors.blue
@@ -445,7 +442,9 @@ class _ConfigPageState extends State<ConfigPage> {
                                     : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setCardStyle('Solo texto');
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setCardStyle('Solo texto');
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -459,17 +458,15 @@ class _ConfigPageState extends State<ConfigPage> {
                                 child: Text(
                                   'Solo texto',
                                   style: TextStyle(
-                                    color: configProvider.cardStyle! ==
-                                            'Solo texto'
+                                    color: appConfig.cardStyle == 'Solo texto'
                                         ? prefs.highContrast
                                             ? Colors.black
                                             : Colors.white
                                         : Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -482,7 +479,7 @@ class _ConfigPageState extends State<ConfigPage> {
                           ),
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.cardStyle! == 'Texto e Imagen'
+                            color: appConfig.cardStyle == 'Texto e Imagen'
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : Colors.blue
@@ -491,7 +488,9 @@ class _ConfigPageState extends State<ConfigPage> {
                                     : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setCardStyle('Texto e Imagen');
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setCardStyle('Texto e Imagen');
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -505,17 +504,16 @@ class _ConfigPageState extends State<ConfigPage> {
                                 child: Text(
                                   'Texto e Imagen',
                                   style: TextStyle(
-                                    color: configProvider.cardStyle! ==
-                                            'Texto e Imagen'
-                                        ? prefs.highContrast
-                                            ? Colors.black
-                                            : Colors.white
-                                        : Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    color:
+                                        appConfig.cardStyle == 'Texto e Imagen'
+                                            ? prefs.highContrast
+                                                ? Colors.black
+                                                : Colors.white
+                                            : Colors.white,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -528,7 +526,7 @@ class _ConfigPageState extends State<ConfigPage> {
                           ),
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.cardStyle! == 'Solo imagen'
+                            color: appConfig.cardStyle == 'Solo imagen'
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : Colors.blue
@@ -537,7 +535,9 @@ class _ConfigPageState extends State<ConfigPage> {
                                     : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setCardStyle('Solo imagen');
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setCardStyle('Solo imagen');
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -551,17 +551,15 @@ class _ConfigPageState extends State<ConfigPage> {
                                 child: Text(
                                   'Solo imagen',
                                   style: TextStyle(
-                                    color: configProvider.cardStyle! ==
-                                            'Solo imagen'
+                                    color: appConfig.cardStyle == 'Solo imagen'
                                         ? prefs.highContrast
                                             ? Colors.black
                                             : Colors.white
                                         : Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -580,8 +578,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Tamaño de texto',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * configProvider.factorSize!
-                              : mq.height * configProvider.factorSize!,
+                              ? mq.width * appConfig.factorSize
+                              : mq.height * appConfig.factorSize,
                           fontWeight: FontWeight.bold,
                           color: prefs.highContrast
                               ? Colors.white
@@ -598,7 +596,7 @@ class _ConfigPageState extends State<ConfigPage> {
                         children: <Widget>[
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.factorText! == 'pequeño'
+                            color: appConfig.factorText == 'pequeño'
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : Colors.blue
@@ -607,8 +605,9 @@ class _ConfigPageState extends State<ConfigPage> {
                                     : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setFactorSize(
-                                    mq.width, 'pequeño');
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setFactorSize(mq.width, 'pequeño');
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -622,17 +621,15 @@ class _ConfigPageState extends State<ConfigPage> {
                                 child: Text(
                                   'Pequeño',
                                   style: TextStyle(
-                                    color:
-                                        configProvider.factorText! == 'pequeño'
-                                            ? prefs.highContrast
-                                                ? Colors.black
-                                                : Colors.white
-                                            : Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    color: appConfig.factorText == 'pequeño'
+                                        ? prefs.highContrast
+                                            ? Colors.black
+                                            : Colors.white
+                                        : Colors.white,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -645,18 +642,18 @@ class _ConfigPageState extends State<ConfigPage> {
                           ),
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color:
-                                configProvider.factorText! == 'predeterminado'
-                                    ? prefs.highContrast
-                                        ? Colors.white
-                                        : Colors.blue
-                                    : prefs.highContrast
-                                        ? Colors.transparent
-                                        : Colors.grey[400],
+                            color: appConfig.factorText == 'predeterminado'
+                                ? prefs.highContrast
+                                    ? Colors.white
+                                    : Colors.blue
+                                : prefs.highContrast
+                                    ? Colors.transparent
+                                    : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setFactorSize(
-                                    mq.width, 'predeterminado');
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setFactorSize(mq.width, 'predeterminado');
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -670,17 +667,16 @@ class _ConfigPageState extends State<ConfigPage> {
                                 child: Text(
                                   'Predeterminado',
                                   style: TextStyle(
-                                    color: configProvider.factorText! ==
+                                    color: appConfig.factorText ==
                                             'predeterminado'
                                         ? prefs.highContrast
                                             ? Colors.black
                                             : Colors.white
                                         : Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -693,7 +689,7 @@ class _ConfigPageState extends State<ConfigPage> {
                           ),
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.factorText! == 'grande'
+                            color: appConfig.factorText == 'grande'
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : Colors.blue
@@ -702,8 +698,9 @@ class _ConfigPageState extends State<ConfigPage> {
                                     : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setFactorSize(
-                                    mq.width, 'grande');
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setFactorSize(mq.width, 'grande');
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -717,17 +714,15 @@ class _ConfigPageState extends State<ConfigPage> {
                                 child: Text(
                                   'Grande',
                                   style: TextStyle(
-                                    color:
-                                        configProvider.factorText! == 'grande'
-                                            ? prefs.highContrast
-                                                ? Colors.black
-                                                : Colors.white
-                                            : Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    color: appConfig.factorText == 'grande'
+                                        ? prefs.highContrast
+                                            ? Colors.black
+                                            : Colors.white
+                                        : Colors.white,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -746,8 +741,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Diseño de pantalla',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * configProvider.factorSize!
-                              : mq.height * configProvider.factorSize!,
+                              ? mq.width * appConfig.factorSize
+                              : mq.height * appConfig.factorSize,
                           fontWeight: FontWeight.bold,
                           color: prefs.highContrast
                               ? Colors.white
@@ -764,7 +759,7 @@ class _ConfigPageState extends State<ConfigPage> {
                         children: <Widget>[
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.highContrast!
+                            color: appConfig.highContrast
                                 ? prefs.highContrast
                                     ? Colors.transparent
                                     : Colors.grey[400]
@@ -773,7 +768,9 @@ class _ConfigPageState extends State<ConfigPage> {
                                     : Colors.blue,
                             child: InkWell(
                               onTap: () {
-                                configProvider.setHighContrast(false);
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setHighContrast(false);
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -788,11 +785,10 @@ class _ConfigPageState extends State<ConfigPage> {
                                   'Predeterminado',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -805,7 +801,7 @@ class _ConfigPageState extends State<ConfigPage> {
                           ),
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.highContrast!
+                            color: appConfig.highContrast
                                 ? prefs.highContrast
                                     ? Colors.white
                                     : Colors.blue
@@ -814,7 +810,9 @@ class _ConfigPageState extends State<ConfigPage> {
                                     : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setHighContrast(true);
+                                ref
+                                    .read(configProvider.notifier)
+                                    .setHighContrast(true);
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
@@ -831,11 +829,10 @@ class _ConfigPageState extends State<ConfigPage> {
                                     color: prefs.highContrast
                                         ? Colors.black
                                         : Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    fontSize:
+                                        orientation == Orientation.portrait
+                                            ? mq.width * appConfig.factorSize
+                                            : mq.height * appConfig.factorSize,
                                   ),
                                 ),
                               ),
@@ -859,8 +856,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Desarrollado por'.toUpperCase(),
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * 0.6 * configProvider.factorSize!
-                              : mq.height * 0.6 * configProvider.factorSize!,
+                              ? mq.width * 0.6 * appConfig.factorSize
+                              : mq.height * 0.6 * appConfig.factorSize,
                           color: prefs.highContrast
                               ? Colors.white
                               : const Color(0xFF003A70),
@@ -875,8 +872,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Clínica de Tecnología Asistiva, FLENI',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * 0.8 * configProvider.factorSize!
-                              : mq.height * 0.8 * configProvider.factorSize!,
+                              ? mq.width * 0.8 * appConfig.factorSize
+                              : mq.height * 0.8 * appConfig.factorSize,
                           color: prefs.highContrast
                               ? Colors.white
                               : const Color(0xFF003A70),
@@ -902,7 +899,7 @@ class _ConfigPageState extends State<ConfigPage> {
                           }
                         },
                         child: Image.asset(
-                          configProvider.highContrast!
+                          appConfig.highContrast
                               ? 'assets/images/fleni-logo-h.png'
                               : 'assets/images/fleni-logo.png',
                           width: orientation == Orientation.portrait

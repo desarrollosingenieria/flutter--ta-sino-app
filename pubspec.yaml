@@ -1,25 +1,26 @@
 name: tasino
 description: Aplicación de comunicación Bimodal SI-NO.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_tts: ^3.6.3
-  shared_preferences: ^2.1.0
-  url_launcher: ^6.2.5
   flutter_riverpod: ^2.4.10
+  flutter_tts: ^3.6.3
   riverpod_annotation: ^2.3.4
+  shared_preferences: ^2.1.0
+  url_launcher: ^6.2.4
 
 dev_dependencies:
   build_runner: ^2.4.8
   custom_lint: ^0.6.2
   flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.0.2
   flutter_test:
     sdk: flutter
   riverpod_generator: ^2.3.11
@@ -30,3 +31,7 @@ flutter:
 
   assets:
     - assets/images/
+
+flutter_native_splash:
+  color: "#003A70"
+  image: "assets/images/tasino-iso.png"

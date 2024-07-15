@@ -1,11 +1,11 @@
 {
-    "name": "tecresponde",
-    "short_name": "tecresponde",
+    "name": "TA SiNo: App de Comunicación",
+    "short_name": "TA SiNo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Aplicación de Comunicación Básica SI/NO",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.fleni.tecresponde" "\0"
-            VALUE "FileDescription", "tecresponde" "\0"
+            VALUE "CompanyName", "com.fleni.tasino" "\0"
+            VALUE "FileDescription", "tasino" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "tecresponde" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.fleni.tecresponde. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tecresponde.exe" "\0"
-            VALUE "ProductName", "tecresponde" "\0"
+            VALUE "InternalName", "tasino" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.fleni.tasino. All rights reserved." "\0"
+            VALUE "OriginalFilename", "tasino.exe" "\0"
+            VALUE "ProductName", "tasino" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

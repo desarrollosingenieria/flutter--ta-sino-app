@@ -10,7 +10,7 @@ Future<void> main() async {
   await Hive.openBox('voiceParameters');
   runApp(
     const ProviderScope(
-      child: BasicCOM(),
+      child: TASino(),
     ),
   );
 }

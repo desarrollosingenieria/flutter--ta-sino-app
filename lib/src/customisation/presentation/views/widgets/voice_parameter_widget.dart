@@ -52,7 +52,7 @@ class VoiceParameterWidget extends ConsumerWidget {
                       : size.height * 0.1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(500),
-                    color: voiceParameters.pitch > 0.05
+                    color: parameter > 0.05
                         ? appParameters.highContrast
                             ? Colors.white
                             : const Color(0xFF003A70)

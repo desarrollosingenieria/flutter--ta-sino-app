@@ -15,7 +15,7 @@ class HomeScreen extends ConsumerWidget {
       backgroundColor: appParameters.highContrast ? Colors.black : Colors.white,
       appBar: AppBar(
         title: const Text(
-          'Basic COM',
+          'TA SiNo',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: const Color(0xFF003A70),

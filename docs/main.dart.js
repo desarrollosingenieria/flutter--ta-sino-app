@@ -69293,7 +69293,7 @@ break
 case 1:return A.G(q,r)}})
 return A.H($async$nF,r)}}
 A.Cu.prototype={
-jB(a,b){var s,r,q=null,p="Predeterminado",o="Alto contraste",n=b.i9($.e3(),t.Hc),m=b.i9($.iU(),t.Y9),l=n.d,k=l?B.k:B.h,j=A.agN(q,B.ba,!0,0,B.kz,B.N6),i=A.aeC(new A.SO(b),new A.SP(b),"Volumen",m.a),h=A.aeC(new A.SQ(b),new A.SU(b),"Velocidad",m.b),g=A.aeC(new A.SV(b),new A.SW(b),"Tono",m.c),f=n.c,e=t.E
+jB(a,b){var s,r,q=null,p="Predeterminado",o="Alto contraste",n=b.i9($.e3(),t.Hc),m=b.i9($.iU(),t.Y9),l=n.d,k=l?B.k:B.h,j=A.agN(q,B.ba,!0,0,B.kz,B.N5),i=A.aeC(new A.SO(b),new A.SP(b),"Volumen",m.a),h=A.aeC(new A.SQ(b),new A.SU(b),"Velocidad",m.b),g=A.aeC(new A.SV(b),new A.SW(b),"Tono",m.c),f=n.c,e=t.E
 f=A.j3(A.a([B.N9,A.lW(new A.SX(b),"Solo texto",f),A.lW(new A.SY(b),"Texto e imagen",f),A.lW(new A.SZ(b),"Solo imagen",f)],e),B.ao,B.aX)
 s=n.b
 s=A.j3(A.a([B.Na,A.lW(new A.T_(b,a),"Texto peque\xf1o",s),A.lW(new A.T0(b,a),"Texto predeterminado",s),A.lW(new A.SR(b,a),"Texto grande",s)],e),B.ao,B.aX)
@@ -69635,7 +69635,7 @@ A.a4Y.prototype={
 $1(a){return a},
 $S:71}
 A.Ef.prototype={
-jB(a,b){var s,r=null,q="assets/images/afirmar_m.png",p="assets/images/negar_m.png",o=b.i9($.e3(),t.Hc).d,n=o?B.k:B.h,m=t.E,l=A.agN(A.a([A.aie(r,B.B6,new A.WT(a),r,r)],m),B.ba,!0,0,r,B.N5)
+jB(a,b){var s,r=null,q="assets/images/afirmar_m.png",p="assets/images/negar_m.png",o=b.i9($.e3(),t.Hc).d,n=o?B.k:B.h,m=t.E,l=A.agN(A.a([A.aie(r,B.B6,new A.WT(a),r,r)],m),B.ba,!0,0,r,B.N6)
 if(A.bC(a,r,t.w).w.gf3(0)===B.aO){s=A.Rt(o?B.pX:B.pW,q,"S\xed")
 m=A.j3(A.a([s,A.Rt(o?B.pZ:B.pY,p,"No")],m),B.ao,B.hU)
 o=m}else{s=A.Rt(o?B.pX:B.pW,q,"S\xed")
@@ -74240,8 +74240,8 @@ B.LM=new A.t(!0,B.k,null,"Roboto",B.A,null,null,null,null,null,null,null,null,nu
 B.LW=new A.t(!0,B.k,null,"Roboto",B.A,null,null,null,null,null,null,null,null,null,null,null,null,B.f,null,null,null,"blackHelsinki labelSmall",null,null,null,null)
 B.N4=new A.dB(B.MC,B.Kk,B.L6,B.LL,B.LY,B.JS,B.KL,B.JW,B.Lz,B.M9,B.Lc,B.Ma,B.Mj,B.LM,B.LW)
 B.vV=new A.t(!0,B.h,null,null,null,null,null,B.bH,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.N5=new A.nF("Basic COM",null,B.vV,null,null)
-B.N6=new A.nF("Configuraciones",null,B.vV,null,null)
+B.N5=new A.nF("Configuraciones",null,B.vV,null,null)
+B.N6=new A.nF("TA SiNo",null,B.vV,null,null)
 B.PF=new A.a4c(0,"system")
 B.N7=new A.xy(null)
 B.f6=new A.Id(0,"clamp")
